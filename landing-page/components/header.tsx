@@ -21,7 +21,7 @@ export default function Header() {
     { name: "Downloads", href: "#downloads" },
     { name: "Features", href: "#features" },
     { name: "Why Pluely?", href: "#why" },
-    { name: "Pricing", href: "#pricing" },
+    { name: "Pricing", href: "/pricing" },
     { name: "Affiliate", href: "#affiliate" },
   ]
 
