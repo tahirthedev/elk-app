@@ -74,7 +74,8 @@ export default function PricingPage() {
         body: JSON.stringify({
           email,
           password,
-          plan: 'FREE'
+          firstName: email.split('@')[0], // Use email prefix as default name
+          lastName: '',
         }),
       });
 
