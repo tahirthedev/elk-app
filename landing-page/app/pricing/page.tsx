@@ -75,7 +75,7 @@ export default function PricingPage() {
           email,
           password,
           firstName: email.split('@')[0], // Use email prefix as default name
-          lastName: '',
+          lastName: 'User',
         }),
       });
 
