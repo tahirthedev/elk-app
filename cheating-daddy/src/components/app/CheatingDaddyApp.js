@@ -418,23 +418,9 @@ export class CheatingDaddyApp extends LitElement {
             console.log('[setResponse] sessionActive:', this.sessionActive, 'isRecording:', this.isRecording);
             
             if (this.isRecording) {
-                // Open listen window if not already open (lazy open on first response)
-                if (!this._listenWindowOpened) {
-                    this._listenWindowOpened = true;
-                    ipcRenderer.invoke('open-listen-window').then(() => {
-                        console.log('[setResponse] Listen window opened on first response');
-                        // Send status AFTER window opens
-                        ipcRenderer.send('update-listen-status', true);
-                        // Small delay to ensure window is ready
-                        setTimeout(() => {
-                            ipcRenderer.send('listen-response-update', response);
-                        }, 100);
-                    });
-                } else {
-                    // Send to listen window
-                    console.log('[setResponse] Sending to listen window');
-                    ipcRenderer.send('listen-response-update', response);
-                }
+                // Window should already be open, just send the response
+                console.log('[setResponse] Sending to listen window');
+                ipcRenderer.send('listen-response-update', response);
             }
             if (this.sessionActive) {
                 // Send to capture window
@@ -580,8 +566,15 @@ export class CheatingDaddyApp extends LitElement {
             return;
         }
         
-        // Don't open listen window immediately - it will open when response starts streaming
-        // The window opens via setResponse when isRecording is true
+        // Open listen window immediately when starting
+        if (window.require) {
+            const { ipcRenderer } = window.require('electron');
+            await ipcRenderer.invoke('open-listen-window');
+            console.log('[handleToggleListen] Listen window opened immediately');
+            this._listenWindowOpened = true;
+            // Send initial status
+            ipcRenderer.send('update-listen-status', true);
+        }
         
         // Start recording
         this.isRecording = true;

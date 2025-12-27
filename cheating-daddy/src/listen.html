@@ -82,8 +82,15 @@
 
             function applyStreamingTextToDOM(text) {
                 try {
-                    // Prefer updating the rendered DOM directly to avoid re-running
-                    // expensive markdown/wrapping logic on every chunk.
+                    // Always set the response property first to ensure content is rendered
+                    if (!listenView.response) {
+                        // First update - need to trigger full render to show content area
+                        listenView.response = text;
+                        listenView.requestUpdate();
+                        return;
+                    }
+                    
+                    // For subsequent updates, prefer direct DOM manipulation for performance
                     const container = listenView.shadowRoot && listenView.shadowRoot.querySelector('.response-content');
                     if (container) {
                         // Set plain text for streaming (fast). We'll render markdown when stream finalizes.
@@ -91,9 +98,13 @@
                     } else {
                         // Fallback - set the property which will trigger a full render
                         listenView.response = text;
+                        listenView.requestUpdate();
                     }
                 } catch (e) {
                     console.warn('Error applying streaming text to DOM:', e);
+                    // Fallback to property update
+                    listenView.response = text;
+                    listenView.requestUpdate();
                 }
             }
 
