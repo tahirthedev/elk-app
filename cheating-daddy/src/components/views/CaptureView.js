@@ -371,6 +371,7 @@ export class CaptureView extends LitElement {
         this.onClose = () => {};
         this.onSendMessage = () => {};
         this.response = '';
+        this._sendInProgress = false; // Prevent duplicate sends
         this._setupResponseListener();
     }
 
@@ -419,10 +420,22 @@ export class CaptureView extends LitElement {
     }
 
     handleSendMessage() {
+        // Prevent duplicate sends
+        if (this._sendInProgress) {
+            console.log('[CaptureView] Send already in progress, ignoring duplicate');
+            return;
+        }
+
         const input = this.shadowRoot.querySelector('#messageInput');
         const message = input?.value?.trim();
         
         if (!message) return;
+        
+        console.log('[CaptureView] Sending capture query:', message);
+        this._sendInProgress = true;
+
+        // Clear input immediately
+        input.value = '';
         
         // Send message via IPC
         if (window.require) {
@@ -435,7 +448,10 @@ export class CaptureView extends LitElement {
             this.onSendMessage(message);
         }
         
-        input.value = '';
+        // Reset flag after a delay to prevent rapid-fire
+        setTimeout(() => {
+            this._sendInProgress = false;
+        }, 1000);
     }
 
     handleKeydown(e) {

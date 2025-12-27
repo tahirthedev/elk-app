@@ -959,9 +959,27 @@ function setupGeminiIpcHandlers(geminiSessionRef) {
         return false;
     });
     
+    // Debounce flag for capture queries
+    let captureQueryInProgress = false;
+    
     // Handle capture queries (REST API with streaming)
     ipcMain.handle('send-capture-query', async (event, { text, imageData }) => {
-        return await sendCaptureQuery(text, imageData);
+        // Prevent duplicate rapid-fire queries
+        if (captureQueryInProgress) {
+            console.log('[Gemini] Capture query already in progress, ignoring duplicate');
+            return { success: false, error: 'Query already in progress' };
+        }
+        
+        captureQueryInProgress = true;
+        try {
+            const result = await sendCaptureQuery(text, imageData);
+            return result;
+        } finally {
+            // Reset flag after a delay to prevent rapid-fire
+            setTimeout(() => {
+                captureQueryInProgress = false;
+            }, 1000);
+        }
     });
 
     ipcMain.handle('send-audio-content', async (event, { data, mimeType }) => {

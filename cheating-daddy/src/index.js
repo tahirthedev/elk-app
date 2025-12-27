@@ -133,9 +133,11 @@ function setupGeneralIpcHandlers() {
 
     // Forward transparency changes to world window
     ipcMain.on('transparency-changed', (event, alpha) => {
+        console.log(`[Backend] Received transparency-changed: ${alpha} (${Math.round(alpha * 100)}%)`);
         const { getWorldWindow } = require('./utils/window');
         const worldWin = getWorldWindow();
         if (worldWin && !worldWin.isDestroyed()) {
+            console.log('[Backend] Forwarding to World window');
             worldWin.webContents.send('update-transparency', alpha);
         }
     });

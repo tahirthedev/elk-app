@@ -529,6 +529,13 @@ export class CustomizeView extends LitElement {
         this.loadSubscriptionData();
     }
 
+    firstUpdated() {
+        // This runs AFTER the first render, so the slider element exists in the DOM
+        // Reload background transparency to ensure slider shows correct value
+        this.loadBackgroundTransparency();
+        console.log('🎨 [CustomizeView] Reloaded transparency from localStorage:', Math.round(this.backgroundTransparency * 100) + '%');
+    }
+
     async loadSubscriptionData() {
         try {
             this.loadingSubscription = true;
@@ -931,26 +938,30 @@ export class CustomizeView extends LitElement {
 
     loadBackgroundTransparency() {
         const backgroundTransparency = localStorage.getItem('backgroundTransparency');
+        console.log(`[CustomizeView] Loading from localStorage: "${backgroundTransparency}"`);
         if (backgroundTransparency !== null) {
-            this.backgroundTransparency = parseFloat(backgroundTransparency) || 0.8;
+            // Don't use || fallback because 0 is a valid value!
+            const parsed = parseFloat(backgroundTransparency);
+            if (!isNaN(parsed)) {
+                this.backgroundTransparency = parsed;
+            }
         }
+        console.log(`[CustomizeView] Loaded transparency value: ${this.backgroundTransparency} (${Math.round(this.backgroundTransparency * 100)}%)`);
         this.updateBackgroundTransparency();
     }
 
     handleBackgroundTransparencyChange(e) {
         this.backgroundTransparency = parseFloat(e.target.value);
+        console.log(`[CustomizeView] Saving transparency: ${this.backgroundTransparency} (${Math.round(this.backgroundTransparency * 100)}%)`);
         localStorage.setItem('backgroundTransparency', this.backgroundTransparency.toString());
+        console.log(`[CustomizeView] Saved to localStorage: "${localStorage.getItem('backgroundTransparency')}"`);
         this.updateBackgroundTransparency();
         this.requestUpdate();
     }
 
     updateBackgroundTransparency() {
-        const root = document.documentElement;
         // Apply transparency to the entire app background
         const alpha = this.backgroundTransparency;
-        
-        // Set the main app window background with the transparency value
-        root.style.setProperty('--app-background', `rgba(0, 0, 0, ${alpha})`);
         
         // Update glass blur intensity based on transparency
         // Higher transparency = stronger blur for better glass effect
@@ -958,9 +969,54 @@ export class CustomizeView extends LitElement {
         const strongBlur = 20 + (alpha * 40); // Range: 20px - 60px
         const subtleBlur = 5 + (alpha * 15); // Range: 5px - 20px
         
-        root.style.setProperty('--glass-blur', `blur(${baseBlur}px)`);
-        root.style.setProperty('--glass-blur-strong', `blur(${strongBlur}px)`);
-        root.style.setProperty('--glass-blur-subtle', `blur(${subtleBlur}px)`);
+        // Apply to the main app's Shadow DOM directly
+        const mainApp = document.querySelector('cheating-daddy-app');
+        if (mainApp && mainApp.shadowRoot) {
+            // Remove existing style if present
+            let existingStyle = mainApp.shadowRoot.getElementById('dynamic-transparency-override');
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+            
+            // Create new style tag and append it LAST (highest priority)
+            const shadowStyle = document.createElement('style');
+            shadowStyle.id = 'dynamic-transparency-override';
+            shadowStyle.textContent = `
+                :host {
+                    background-color: rgba(0, 0, 0, ${alpha}) !important;
+                }
+                .window-container {
+                    background: rgba(0, 0, 0, ${alpha}) !important;
+                    backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+                    -webkit-backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+                }
+                /* Override header-only-mode to respect transparency setting */
+                .window-container.header-only-mode {
+                    background: rgba(0, 0, 0, ${alpha}) !important;
+                    backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+                    -webkit-backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+                }
+            `;
+            // Append LAST so it has highest CSS priority
+            mainApp.shadowRoot.appendChild(shadowStyle);
+        }
+        
+        // Also update the global style tag for other windows
+        let styleTag = document.getElementById('dynamic-transparency-styles');
+        if (!styleTag) {
+            styleTag = document.createElement('style');
+            styleTag.id = 'dynamic-transparency-styles';
+            document.head.appendChild(styleTag);
+        }
+        
+        styleTag.textContent = `
+            :root {
+                --app-background: rgba(0, 0, 0, ${alpha}) !important;
+                --glass-blur: blur(${baseBlur}px) !important;
+                --glass-blur-strong: blur(${strongBlur}px) !important;
+                --glass-blur-subtle: blur(${subtleBlur}px) !important;
+            }
+        `;
         
         // Notify other windows to update if they're open
         if (window.require) {

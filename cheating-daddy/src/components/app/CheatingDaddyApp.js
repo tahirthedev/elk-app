@@ -234,6 +234,9 @@ export class CheatingDaddyApp extends LitElement {
     connectedCallback() {
         super.connectedCallback();
 
+        // Load background transparency on startup
+        this.reloadBackgroundTransparency();
+
         // Listen for login success event
         this.addEventListener('login-success', this.handleLoginSuccess.bind(this));
         
@@ -879,6 +882,73 @@ export class CheatingDaddyApp extends LitElement {
         this.currentView = 'main';
     }
 
+    // Reload background transparency from localStorage
+    reloadBackgroundTransparency() {
+        const backgroundTransparency = localStorage.getItem('backgroundTransparency');
+        console.log(`[Main App] Raw localStorage value: "${backgroundTransparency}"`);
+        const alpha = backgroundTransparency !== null ? parseFloat(backgroundTransparency) : 0.5; // Default to 0.5
+        console.log(`[Main App] Parsed alpha value: ${alpha}`);
+        
+        // Update glass blur intensity
+        const baseBlur = 10 + (alpha * 30);
+        const strongBlur = 20 + (alpha * 40);
+        const subtleBlur = 5 + (alpha * 15);
+        
+        // Inject style directly into Shadow DOM (this is the most reliable way)
+        // Remove existing style if present
+        let existingStyle = this.shadowRoot.getElementById('dynamic-transparency-override');
+        if (existingStyle) {
+            existingStyle.remove();
+        }
+        
+        // Create new style tag and append it LAST (highest priority)
+        const shadowStyle = document.createElement('style');
+        shadowStyle.id = 'dynamic-transparency-override';
+        shadowStyle.textContent = `
+            :host {
+                background-color: rgba(0, 0, 0, ${alpha}) !important;
+            }
+            .window-container {
+                background: rgba(0, 0, 0, ${alpha}) !important;
+                backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+                -webkit-backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+            }
+            /* Override header-only-mode to respect transparency setting */
+            .window-container.header-only-mode {
+                background: rgba(0, 0, 0, ${alpha}) !important;
+                backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+                -webkit-backdrop-filter: blur(${strongBlur}px) brightness(1.1) !important;
+            }
+        `;
+        // Append LAST so it has highest CSS priority
+        this.shadowRoot.appendChild(shadowStyle);
+        
+        console.log(`[Main App] Injected style into Shadow DOM, element count: ${this.shadowRoot.children.length}`);
+        
+        // Also set globally for other windows (Capture, Listen, World)
+        let globalStyleTag = document.getElementById('dynamic-transparency-styles');
+        if (!globalStyleTag) {
+            globalStyleTag = document.createElement('style');
+            globalStyleTag.id = 'dynamic-transparency-styles';
+            document.head.appendChild(globalStyleTag);
+        }
+        
+        globalStyleTag.textContent = `
+            :root {
+                --app-background: rgba(0, 0, 0, ${alpha}) !important;
+                --glass-blur: blur(${baseBlur}px) !important;
+                --glass-blur-strong: blur(${strongBlur}px) !important;
+                --glass-blur-subtle: blur(${subtleBlur}px) !important;
+            }
+        `;
+        
+        console.log(`[Main App] Reloaded background transparency: ${Math.round(alpha * 100)}% (0=transparent, 100=black)`);
+        console.log(`[Main App] Applied: background: rgba(0, 0, 0, ${alpha})`);
+        
+        // Force re-render to apply the changes
+        this.requestUpdate();
+    }
+
     async updated(changedProperties) {
         super.updated(changedProperties);
 
@@ -886,6 +956,20 @@ export class CheatingDaddyApp extends LitElement {
         if (changedProperties.has('currentView') && window.require) {
             const { ipcRenderer } = window.require('electron');
             ipcRenderer.send('view-changed', this.currentView);
+
+            const previousView = changedProperties.get('currentView');
+            console.log(`[Main App] View changed: ${previousView} → ${this.currentView}`);
+
+            // Reload transparency when leaving customize view
+            if (previousView === 'customize' && this.currentView !== 'customize') {
+                console.log('[Main App] Leaving customize view, reloading transparency...');
+                this.reloadBackgroundTransparency();
+                // Also reload after a short delay to ensure it applies after render
+                setTimeout(() => {
+                    console.log('[Main App] Re-applying transparency after render...');
+                    this.reloadBackgroundTransparency();
+                }, 100);
+            }
 
             // Manage header-only mode class on document for pointer events
             if (this.currentView === 'assistant') {
