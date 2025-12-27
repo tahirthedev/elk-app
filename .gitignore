@@ -47,3 +47,6 @@ coverage/
 *.deb
 *.rpm
 *.AppImage
+
+# Landing page - not working on it today
+landing-page/

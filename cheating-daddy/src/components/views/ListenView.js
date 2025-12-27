@@ -431,10 +431,6 @@ export class ListenView extends LitElement {
                         </svg>
                         Listen
                     </div>
-                    <div class="status-indicator ${this.isListening ? 'active' : ''}">
-                        <span class="status-dot ${this.isListening ? 'active' : ''}"></span>
-                        ${this.isListening ? 'Listening...' : 'Stopped'}
-                    </div>
                     <button class="close-button" @click=${this.handleClose} title="Close">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
