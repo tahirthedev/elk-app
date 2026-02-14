@@ -157,13 +157,27 @@ Remember: Accuracy and recency of information are paramount.`
   }
 
   // Extract and format citations from Perplexity response
+  // Perplexity API returns citations as a flat array of URL strings like:
+  // ["https://example.com/page1", "https://example.com/page2"]
   private extractCitations(rawCitations: any[]): Citation[] {
-    return rawCitations.map((citation, index) => ({
-      title: citation.title || `Source ${index + 1}`,
-      url: citation.url || '',
-      snippet: citation.text || citation.snippet || '',
-      publishedDate: citation.published_date || citation.date,
-    })).filter(citation => citation.url) // Only include citations with URLs
+    return rawCitations.map((citation, index) => {
+      // Handle string citations (just URLs) - this is the format Perplexity actually returns
+      if (typeof citation === 'string') {
+        return {
+          title: `Source ${index + 1}`,
+          url: citation,
+          snippet: '',
+          publishedDate: undefined,
+        }
+      }
+      // Handle object citations (in case Perplexity changes their format)
+      return {
+        title: citation.title || `Source ${index + 1}`,
+        url: citation.url || '',
+        snippet: citation.text || citation.snippet || '',
+        publishedDate: citation.published_date || citation.date,
+      }
+    }).filter(citation => citation.url) // Only include citations with URLs
   }
 
   // Format answer with improved citation formatting

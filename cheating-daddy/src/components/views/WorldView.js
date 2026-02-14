@@ -179,6 +179,7 @@ export class WorldView extends LitElement {
             min-height: 0;
             padding: 8px 12px 16px 12px;
             margin-top: 4px;
+            position: relative;
         }
 
         .response-content {
@@ -316,57 +317,48 @@ export class WorldView extends LitElement {
             align-items: center;
             justify-content: center;
             position: relative;
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.9);
-            padding: 0 4px;
-            margin: 0 1px;
+            background: rgba(135, 206, 250, 0.15);
+            color: rgba(135, 206, 250, 0.95);
+            padding: 0 5px;
+            margin: 0 2px;
             border-radius: 4px;
             font-size: 0.85em;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
             text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(135, 206, 250, 0.25);
+            vertical-align: baseline;
+            line-height: 1.4;
         }
 
         .citation-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(135, 206, 250, 0.3);
+            border-color: rgba(135, 206, 250, 0.5);
+            box-shadow: 0 2px 8px rgba(135, 206, 250, 0.2);
+            transform: translateY(-1px);
+            color: white;
         }
 
         .citation-tooltip {
-            position: absolute;
-            bottom: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(25, 25, 30, 0.95);
+            position: fixed;
+            background: rgba(20, 20, 25, 0.98);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(135, 206, 250, 0.3);
             border-radius: 8px;
             padding: 8px 12px;
             font-size: 11px;
             white-space: nowrap;
-            max-width: 300px;
+            max-width: 350px;
             overflow: hidden;
             text-overflow: ellipsis;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.15s ease 0.1s, visibility 0.15s ease 0.1s;
-            z-index: 1000;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Invisible bridge to prevent flickering when moving to tooltip */
-        .citation-tooltip::before {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            height: 12px; /* Bridge the gap between tooltip and link */
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            z-index: 10000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(135, 206, 250, 0.1);
         }
 
         .citation-tooltip::after {
@@ -376,19 +368,18 @@ export class WorldView extends LitElement {
             left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
-            border-top-color: rgba(255, 255, 255, 0.2);
+            border-top-color: rgba(135, 206, 250, 0.3);
         }
 
         .citation-link:hover .citation-tooltip {
             opacity: 1;
             visibility: visible;
-            pointer-events: auto;
-            transition-delay: 0s; /* Show immediately on hover */
         }
 
         .citation-tooltip-url {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(135, 206, 250, 0.9);
             font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 10px;
         }
 
         .citation-tooltip-label {
@@ -625,7 +616,7 @@ export class WorldView extends LitElement {
             .replace(/\n\n/g, '</p><p>')
             .replace(/\n/g, '<br>');
         
-        // Convert citation references [n] to clickable links with tooltips AFTER markdown
+        // Convert citation references [n] to clickable spans with data-url (not <a href> to avoid Electron blocking)
         html = html.replace(/\[(\d+)\]/g, (match, num) => {
             const index = parseInt(num, 10) - 1;
             const url = citationUrls[index] || '';
@@ -633,27 +624,52 @@ export class WorldView extends LitElement {
                 return `<span class="citation-number">[${num}]</span>`;
             }
             const displayUrl = url.length > 50 ? url.substring(0, 47) + '...' : url;
-            return `<a class="citation-link" href="${url}" target="_blank" rel="noopener">[${num}]<span class="citation-tooltip"><span class="citation-tooltip-label">Source:</span><span class="citation-tooltip-url">${displayUrl}</span></span></a>`;
+            return `<span class="citation-link" data-citation-url="${url}" role="button" tabindex="0">[${num}]<span class="citation-tooltip"><span class="citation-tooltip-label">Source:</span><span class="citation-tooltip-url">${displayUrl}</span></span></span>`;
         });
         
         const wrapped = `<p>${html}</p>`;
-        return wrapped;  // Skip wrapWordsInSpans for now to test
+        return wrapped;
     }
 
     // Handle citation clicks to open in external browser
     handleCitationClick(e) {
-        console.log('Click detected on:', e.target);
-        
-        // Check if clicked on a citation link (anchor tag)
+        // Check if clicked on a citation link or its child
         const citationLink = e.target.closest('.citation-link');
         if (citationLink) {
-            const url = citationLink.getAttribute('href');
-            console.log('Citation URL:', url);
-            if (url && url !== '#' && window.require) {
+            const url = citationLink.getAttribute('data-citation-url');
+            console.log('🔗 Citation clicked, URL:', url);
+            if (url && window.require) {
                 e.preventDefault();
                 e.stopPropagation();
                 const { ipcRenderer } = window.require('electron');
                 ipcRenderer.invoke('open-external', url);
+                return;
+            }
+        }
+        
+        // Also handle regular <a> links from markdown
+        const anchor = e.target.closest('a');
+        if (anchor) {
+            const url = anchor.getAttribute('href');
+            if (url && window.require) {
+                e.preventDefault();
+                e.stopPropagation();
+                const { ipcRenderer } = window.require('electron');
+                ipcRenderer.invoke('open-external', url);
+            }
+        }
+    }
+
+    // Position tooltips using fixed positioning to avoid clipping by overflow containers
+    handleCitationHover(e) {
+        const citationLink = e.target.closest('.citation-link');
+        if (citationLink) {
+            const tooltip = citationLink.querySelector('.citation-tooltip');
+            if (tooltip) {
+                const rect = citationLink.getBoundingClientRect();
+                tooltip.style.left = `${rect.left + rect.width / 2}px`;
+                tooltip.style.top = `${rect.top - 8}px`;
+                tooltip.style.transform = 'translateX(-50%) translateY(-100%)';
             }
         }
     }
@@ -699,7 +715,7 @@ export class WorldView extends LitElement {
                         </button>
                     </div>
 
-                    <div class="response-section" @click=${this.handleCitationClick}>
+                    <div class="response-section" @click=${this.handleCitationClick} @mouseover=${this.handleCitationHover}>
                         ${this.isSearching ? html`
                             <div class="loading">
                                 <div class="spinner"></div>
