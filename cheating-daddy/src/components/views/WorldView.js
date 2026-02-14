@@ -311,69 +311,31 @@ export class WorldView extends LitElement {
             color: white;
         }
 
-        /* Citation styling with hover tooltip */
+        /* Citation styling - clean inline badges */
         .citation-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            display: inline;
             position: relative;
             background: rgba(135, 206, 250, 0.15);
             color: rgba(135, 206, 250, 0.95);
-            padding: 0 5px;
-            margin: 0 2px;
-            border-radius: 4px;
-            font-size: 0.85em;
+            padding: 1px 5px;
+            margin: 0 1px;
+            border-radius: 3px;
+            font-size: 0.8em;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
             text-decoration: none;
-            border: 1px solid rgba(135, 206, 250, 0.25);
-            vertical-align: baseline;
-            line-height: 1.4;
+            border: 1px solid rgba(135, 206, 250, 0.2);
         }
 
         .citation-link:hover {
             background: rgba(135, 206, 250, 0.3);
             border-color: rgba(135, 206, 250, 0.5);
-            box-shadow: 0 2px 8px rgba(135, 206, 250, 0.2);
-            transform: translateY(-1px);
             color: white;
         }
 
+        /* Tooltip hidden by default - positioned via JS */
         .citation-tooltip {
-            position: fixed;
-            background: rgba(20, 20, 25, 0.98);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(135, 206, 250, 0.3);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 11px;
-            white-space: nowrap;
-            max-width: 350px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: opacity 0.15s ease, visibility 0.15s ease;
-            z-index: 10000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(135, 206, 250, 0.1);
-        }
-
-        .citation-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: rgba(135, 206, 250, 0.3);
-        }
-
-        .citation-link:hover .citation-tooltip {
-            opacity: 1;
-            visibility: visible;
+            display: none;
         }
 
         .citation-tooltip-url {
@@ -385,6 +347,35 @@ export class WorldView extends LitElement {
         .citation-tooltip-label {
             color: rgba(255, 255, 255, 0.6);
             margin-right: 4px;
+        }
+
+        /* Floating tooltip injected at top level of shadow root */
+        .citation-float-tooltip {
+            position: fixed;
+            background: rgb(25, 25, 30);
+            border: 1px solid rgba(135, 206, 250, 0.35);
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-size: 10px;
+            color: rgba(135, 206, 250, 0.9);
+            font-family: 'Monaco', 'Menlo', monospace;
+            white-space: nowrap;
+            max-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 99999;
+            pointer-events: none;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .citation-float-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(135, 206, 250, 0.35);
         }
 
         /* Citation number without URL */
@@ -623,8 +614,7 @@ export class WorldView extends LitElement {
             if (!url) {
                 return `<span class="citation-number">[${num}]</span>`;
             }
-            const displayUrl = url.length > 50 ? url.substring(0, 47) + '...' : url;
-            return `<span class="citation-link" data-citation-url="${url}" role="button" tabindex="0">[${num}]<span class="citation-tooltip"><span class="citation-tooltip-label">Source:</span><span class="citation-tooltip-url">${displayUrl}</span></span></span>`;
+            return `<span class="citation-link" data-citation-url="${url}" role="button" tabindex="0">[${num}]</span>`;
         });
         
         const wrapped = `<p>${html}</p>`;
@@ -660,18 +650,55 @@ export class WorldView extends LitElement {
         }
     }
 
-    // Position tooltips using fixed positioning to avoid clipping by overflow containers
+    // Position tooltips using a floating div appended to document.body
+    // This avoids Chromium's backdrop-filter compositing bug that causes blur artifacts
     handleCitationHover(e) {
         const citationLink = e.target.closest('.citation-link');
-        if (citationLink) {
-            const tooltip = citationLink.querySelector('.citation-tooltip');
-            if (tooltip) {
-                const rect = citationLink.getBoundingClientRect();
-                tooltip.style.left = `${rect.left + rect.width / 2}px`;
-                tooltip.style.top = `${rect.top - 8}px`;
-                tooltip.style.transform = 'translateX(-50%) translateY(-100%)';
-            }
-        }
+        
+        // Remove any existing floating tooltip
+        const existing = document.getElementById('citation-float-tooltip');
+        if (existing) existing.remove();
+        
+        if (!citationLink) return;
+        
+        const url = citationLink.getAttribute('data-citation-url');
+        if (!url) return;
+        
+        // Create tooltip in document.body (outside shadow DOM to avoid blur)
+        const tooltip = document.createElement('div');
+        tooltip.id = 'citation-float-tooltip';
+        tooltip.textContent = url.length > 55 ? url.substring(0, 52) + '...' : url;
+        Object.assign(tooltip.style, {
+            position: 'fixed',
+            background: 'rgb(25, 25, 30)',
+            border: '1px solid rgba(135, 206, 250, 0.35)',
+            borderRadius: '6px',
+            padding: '6px 10px',
+            fontSize: '10px',
+            color: 'rgb(135, 206, 250)',
+            fontFamily: "Monaco, Menlo, monospace",
+            whiteSpace: 'nowrap',
+            maxWidth: '320px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            zIndex: '99999',
+            pointerEvents: 'none',
+            boxShadow: '0 3px 12px rgba(0, 0, 0, 0.7)',
+        });
+        document.body.appendChild(tooltip);
+        
+        // Position above the citation
+        const rect = citationLink.getBoundingClientRect();
+        const tooltipWidth = tooltip.offsetWidth;
+        tooltip.style.left = `${rect.left + rect.width / 2 - tooltipWidth / 2}px`;
+        tooltip.style.top = `${rect.top - tooltip.offsetHeight - 8}px`;
+        
+        // Remove on mouse leave
+        const removeTooltip = () => {
+            tooltip.remove();
+            citationLink.removeEventListener('mouseleave', removeTooltip);
+        };
+        citationLink.addEventListener('mouseleave', removeTooltip);
     }
 
     render() {
