@@ -36,7 +36,7 @@ export default function Hero() {
             poster="/video/bg-1-poster.jpg"
             className="w-full h-full object-cover"
           >
-            <source src="/video/bg-1.mp4" type="video/mp4" />
+            <source src="http://cdn.elkai.cloud/downloads/videos/bg-1.mp4" type="video/mp4" />
           </video>
         </div>
 

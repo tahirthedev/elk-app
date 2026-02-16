@@ -48,5 +48,9 @@ coverage/
 *.rpm
 *.AppImage
 
+# VPS upload scripts (contain credentials)
+upload-to-vps.ps1
+upload-files.ps1
+
 # Landing page - not working on it today
 # landing-page/

@@ -31,31 +31,31 @@ export default function WhyPluely() {
       title: "Complete Invisibility",
       description:
         "Pluely's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.",
-      video: "/video/complete-1.mp4",
+      video: "http://cdn.elkai.cloud/downloads/videos/complete-1.mp4",
     },
     {
       title: "Keyboard Shortcuts",
       description:
         "Fully customizable global shortcuts for instant access. Toggle window, Dashboard, System Audio, Voice Input, Screenshot, and more with custom keybindings.",
-      video: "/video/complete-2.mp4",
+      video: "http://cdn.elkai.cloud/downloads/videos/complete-2.mp4",
     },
     {
       title: "Always On Top",
       description:
         "Position your AI assistant anywhere on screen with smooth drag-and-drop. Adjustable transparency, always-on-top mode, and instant keyboard access keep Pluely ready when you need it.",
-      video: "/video/complete-3.mp4",
+      video: "http://cdn.elkai.cloud/downloads/videos/complete-3.mp4",
     },
     {
       title: "AI-Powered Assistance",
       description:
         "Get intelligent suggestions and real-time help powered by advanced AI. From code completion to meeting summaries, Pluely understands context and delivers relevant assistance instantly.",
-      video: "/video/complete-4.mp4",
+      video: "http://cdn.elkai.cloud/downloads/videos/complete-4.mp4",
     },
     {
       title: "Multi-Platform Support",
       description:
         "Seamlessly works across Windows, macOS, and Linux. Your AI assistant follows you everywhere, maintaining consistent experience across all your devices and workflows.",
-      video: "/video/slide-1.mp4",
+      video: "http://cdn.elkai.cloud/downloads/videos/slide-1.mp4",
     },
   ]
 

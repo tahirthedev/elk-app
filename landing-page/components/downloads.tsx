@@ -1,42 +1,57 @@
 "use client"
 
-import { Apple, ChevronLeft, ChevronRight, Download, DownloadCloud, DownloadIcon, Icon } from "lucide-react"
+import { Apple, ChevronLeft, ChevronRight, Download, DownloadCloud, DownloadIcon, Icon, Monitor, Package } from "lucide-react"
 import { Button } from "./ui/button"
 import AnimatedHeading from "./animated-heading"
+
+// Base URL for downloads
+const DOWNLOAD_BASE_URL = "http://cdn.elkai.cloud/downloads"
 
 const platforms = [
   {
     name: "macOS",
-    desc: "Apple Silicon & Intel",
+    desc: "Apple Silicon (ARM64)",
     icon: <Apple />,
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-arm64.dmg`,
+    filename: "CheatingDaddy-0.4.0-arm64.dmg"
+  },
+  {
+    name: "macOS",
+    desc: "Intel (x64)",
+    icon: <Apple />,
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-x64.dmg`,
+    filename: "CheatingDaddy-0.4.0-x64.dmg"
   },
   {
     name: "Windows",
     desc: "x64 Architecture",
-    icon: <Apple />,
-  },
-  {
-    name: "Linux",
-    desc: "Debian Package",
-    icon: <Apple />,
+    icon: <Monitor />,
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/windows/CheatingDaddy-0.4.0 Setup.exe`,
+    filename: "CheatingDaddy-0.4.0 Setup.exe"
   },
 ]
 
 const platformsTwo = [
   {
     name: "macOS",
-    desc: "Apple Silicon & Intel",
+    desc: "Apple Silicon (ARM64)",
     icon: <Apple />,
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-arm64.dmg`,
+    filename: "CheatingDaddy-0.4.0-arm64.dmg"
+  },
+  {
+    name: "macOS",
+    desc: "Intel (x64)",
+    icon: <Apple />,
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-x64.dmg`,
+    filename: "CheatingDaddy-0.4.0-x64.dmg"
   },
   {
     name: "Windows",
     desc: "x64 Architecture",
-    icon: <Apple />,
-  },
-  {
-    name: "Linux",
-    desc: "Debian Package",
-    icon: <Apple />,
+    icon: <Monitor />,
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/windows/CheatingDaddy-0.4.0 Setup.exe`,
+    filename: "CheatingDaddy-0.4.0 Setup.exe"
   },
 ]
 
@@ -94,10 +109,14 @@ export default function Downloads() {
                 </div>
                 <ChevronRight className="text-sky-500" />
               </div>
-              <button className="flex items-center justify-center gap-2 w-full px-4 cursor-pointer hover:bg-sky-500 py-2 bg-sky-400 text-white rounded-3xl font-medium transition-colors shadow-md">
+              <a 
+                href={platform.downloadUrl} 
+                download={platform.filename}
+                className="flex items-center justify-center gap-2 w-full px-4 cursor-pointer hover:bg-sky-500 py-2 bg-sky-400 text-white rounded-3xl font-medium transition-colors shadow-md"
+              >
                 <Download size={18} />
-                Download for macOS
-              </button>
+                Download for {platform.name}
+              </a>
             </div>
           ))}
         </div>
@@ -132,46 +151,14 @@ export default function Downloads() {
                 </div>
                 <ChevronRight className="text-sky-500" />
               </div>
-              <button className="flex items-center justify-center gap-2 w-full px-4 cursor-pointer hover:bg-sky-500 py-2 bg-sky-400 text-white rounded-3xl font-medium transition-colors shadow-md">
+              <a 
+                href={platform.downloadUrl} 
+                download={platform.filename}
+                className="flex items-center justify-center gap-2 w-full px-4 cursor-pointer hover:bg-sky-500 py-2 bg-sky-400 text-white rounded-3xl font-medium transition-colors shadow-md"
+              >
                 <Download size={18} />
-                View Release
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex items-center justify-between mt-8">
-          <div className="flex items-center gap-4">
-            <DownloadIcon className="text-sky-600" />
-            <h3 className="text-xl font-semibold text-gray-800">Recent Releases</h3>
-          </div>
-          <Button className="border border-sky-200 rounded-xl text-sky-600 py-4 bg-white/70 backdrop-blur-xl hover:bg-white/90 shadow-lg flex items-center gap-2 cursor-pointer font-semibold">
-            View Release History
-            <DownloadCloud />
-          </Button>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6 mt-4">
-
-          {platformsTwo.map((platform, index) => (
-            <div
-              key={index}
-              className="bg-transparent backdrop-blur-xl rounded-xl p-8 border border-white/70 shadow-lg transition-all  cursor-pointer data-animate"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="flex items-center gap-4 justify-between mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="text-5xl mb-4 text-sky-600">{platform.icon}</div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800">{platform.name}</h3>
-                    <p className="text-gray-500 text-sm mb-4">{platform.desc}</p>
-                  </div>
-                </div>
-                <ChevronRight className="text-sky-500" />
-              </div>
-              <button className="flex items-center justify-center gap-2 w-full px-4 cursor-pointer hover:bg-sky-500 py-2 bg-sky-400 text-white rounded-3xl font-medium transition-colors shadow-md">
-                <Download size={18} />
-                View Release
-              </button>
+                Download {platform.name}
+              </a>
             </div>
           ))}
         </div>

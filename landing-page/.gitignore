@@ -48,3 +48,6 @@ coverage/
 # Misc
 *.log
 *.cache
+
+# Video files (hosted on VPS)
+public/video/*.mp4
