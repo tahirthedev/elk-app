@@ -111,7 +111,8 @@ export default function Downloads() {
               </div>
               <a 
                 href={platform.downloadUrl} 
-                download={platform.filename}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full px-4 cursor-pointer hover:bg-sky-500 py-2 bg-sky-400 text-white rounded-3xl font-medium transition-colors shadow-md"
               >
                 <Download size={18} />
@@ -153,7 +154,8 @@ export default function Downloads() {
               </div>
               <a 
                 href={platform.downloadUrl} 
-                download={platform.filename}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full px-4 cursor-pointer hover:bg-sky-500 py-2 bg-sky-400 text-white rounded-3xl font-medium transition-colors shadow-md"
               >
                 <Download size={18} />
