@@ -7,8 +7,8 @@ module.exports = {
     packagerConfig: {
         asar: true,
         extraResource: ['./src/assets/SystemAudioDump'],
-        name: 'CheatingDaddy',
-        icon: 'src/assets/logo',
+        name: 'ElkAI',
+        icon: 'src/assets/elk-logo',
         appBundleId: 'com.cheatingdaddy.app', // Unique bundle ID for macOS permissions
         afterCopy: [
             (buildPath, electronVersion, platform, arch, callback) => {
@@ -65,9 +65,9 @@ module.exports = {
         {
             name: '@electron-forge/maker-squirrel',
             config: {
-                name: 'cheating-daddy',
-                productName: 'Cheating Daddy',
-                shortcutName: 'Cheating Daddy',
+                name: 'elk-ai',
+                productName: 'Elk AI',
+                shortcutName: 'Elk AI',
                 createDesktopShortcut: true,
                 createStartMenuShortcut: true,
             },
@@ -81,12 +81,12 @@ module.exports = {
             platforms: ['linux'],
             config: {
                 options: {
-                    name: 'Cheating Daddy',
-                    productName: 'Cheating Daddy',
+                    name: 'Elk AI',
+                    productName: 'Elk AI',
                     genericName: 'AI Assistant',
                     description: 'AI assistant for interviews and learning',
                     categories: ['Development', 'Education'],
-                    icon: 'src/assets/logo.png'
+                    icon: 'src/assets/elk-logo.png'
                 }
             },
         },
