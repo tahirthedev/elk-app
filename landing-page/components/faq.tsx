@@ -18,17 +18,17 @@ const faqs = [
   },
   {
     question: "What is the refund policy?",
-    answer: "We offer a 30-day money-back guarantee if you are not satisfied with Pluely.",
+    answer: "We offer a 30-day money-back guarantee if you are not satisfied with Elk AI.",
   },
   {
-    question: "How is Pluely invisible in video calls?",
+    question: "How is Elk AI invisible in video calls?",
     answer:
-      "Pluely uses a translucent overlay window that is not captured by screen sharing protocols, making it invisible in Zoom, Teams, Google Meet, and other video conferencing platforms.",
+      "Elk AI uses a translucent overlay window that is not captured by screen sharing protocols, making it invisible in Zoom, Teams, Google Meet, and other video conferencing platforms.",
   },
   {
     question: "How is my data handled?",
     answer:
-      "All your data stays local on your machine. Pluely does not send any personal data to our servers. Only API calls to your chosen AI provider are made.",
+      "All your data stays local on your machine. Elk AI does not send any personal data to our servers. Only API calls to your chosen AI provider are made.",
   },
   {
     question: "Which AI providers can I use?",
@@ -47,7 +47,7 @@ export default function FAQ() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
           <p className="text-gray-400">
             Can't find what you're looking for?{" "}
-            <Link href="mailto:support@pluely.com" className="text-yellow-400 hover:text-yellow-300">
+            <Link href="mailto:support@elkai.com" className="text-yellow-400 hover:text-yellow-300">
               Contact support
             </Link>{" "}
             for further assistance.

@@ -18,7 +18,7 @@ export default function Invisibility() {
           <div className="order-1 lg:order-2">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6 data-animate">Complete Invisibility</h2>
             <p className="text-gray-400 text-lg mb-6 data-animate" style={{ animationDelay: "0.1s" }}>
-              Pluely's translucent overlay window sits above all applications, invisible in video calls, screen shares,
+              Elk AI's translucent overlay window sits above all applications, invisible in video calls, screen shares,
               and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.
             </p>
             <ul className="space-y-3 data-animate" style={{ animationDelay: "0.2s" }}>

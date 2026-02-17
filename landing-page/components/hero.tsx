@@ -44,7 +44,7 @@ export default function Hero() {
         {/* Badge */}
         {/* <div className="flex justify-center mb-8">
           <Link
-            href="https://github.com/iamsrikanthnani/pluely"
+            href="#"
             className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-gray-200/50 shadow-sm hover:bg-white/80 transition-all"
           >
             <span className="text-yellow-400">✨</span>
@@ -61,7 +61,7 @@ export default function Hero() {
             className="text-lg sm:text-xl text-white max-w-3xl font-light mx-auto animate-fade-in-up"
             style={{ animationDelay: "0.1s" }}
           >
-            Pluely operates with complete stealth during meetings, interviews, and presentations. Undetectable in video
+            Elk AI operates with complete stealth during meetings, interviews, and presentations. Undetectable in video
             calls, screen shares, and recordings. Built with Tauri and Rust for blazing-fast performance, ~10MB size,
             and absolute privacy. 
           </p>
@@ -79,7 +79,7 @@ export default function Hero() {
               <ArrowRight size={18} />
             </Link>
             <Link
-              href="https://github.com/iamsrikanthnani/pluely"
+              href="#"
               className="px-6 py-3 border-2 border-gray-300  text-white rounded-lg font-semibold hover:border-gray-400 hover:bg-white/50 backdrop-blur-sm transition-all flex items-center gap-2"
             >
               <Star size={18} className="text-yellow-400" />

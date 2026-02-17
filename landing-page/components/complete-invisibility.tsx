@@ -9,7 +9,7 @@ const CompleteInvisibility = () => {
             <div className='max-w-6xl mx-auto p-8 mt-6'>
                 <div className='flex items-center justify-between gap-12 mb-8 data-animate'>
                     <AnimatedHeading text="Complete Invisibility" className='font-bold text-4xl whitespace-nowrap' />
-                    <p className='text-gray-600 text-left max-w-xl'>Pluely's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.
+                    <p className='text-gray-600 text-left max-w-xl'>Elk AI's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.
                     </p>
                 </div>
 

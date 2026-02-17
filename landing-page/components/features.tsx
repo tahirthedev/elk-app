@@ -82,9 +82,9 @@ export default function Features() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <AnimatedHeading text="Why Pluely?" className="text-3xl sm:text-4xl font-bold text-center mb-4 text-white drop-shadow-lg" />
+        <AnimatedHeading text="Why Elk AI?" className="text-3xl sm:text-4xl font-bold text-center mb-4 text-white drop-shadow-lg" />
         <p className="text-white/90 text-center max-w-2xl mx-auto mb-16 data-animate">
-          Pluely redefines what an AI assistant can be. Built from the ground up with privacy, performance, and
+          Elk AI redefines what an AI assistant can be. Built from the ground up with privacy, performance, and
           discretion in mind.
         </p>
 

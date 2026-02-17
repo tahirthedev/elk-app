@@ -11,7 +11,7 @@ export default function FaqVideos() {
         {
             title: "Complete Invisibility",
             description:
-                "Pluely's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.",
+                "Elk AI's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.",
             video: "http://cdn.elkai.cloud/downloads/videos/complete-1.mp4",
         },
         {

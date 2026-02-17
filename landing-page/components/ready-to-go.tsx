@@ -16,10 +16,10 @@ export default function ReadyToGo() {
             href="#downloads"
             className="px-8 py-3 bg-white text-black rounded-lg font-semibold hover:bg-gray-200 transition-colors"
           >
-            Download Pluely
+            Download Elk AI
           </Link>
           <Link
-            href="https://github.com/iamsrikanthnani/pluely"
+            href="#"
             className="px-8 py-3 border border-white/20 text-white rounded-lg font-semibold hover:border-white/40 transition-colors"
           >
             Contribute on GitHub

@@ -58,7 +58,7 @@ const platformsTwo = [
 const platformsThree = [
   {
     name: "Ready to get started",
-    desc: "Download Pluely now and experience the privacy-first AI assistant that works seamlessly in the background.",
+    desc: "Download Elk AI now and experience the privacy-first AI assistant that works seamlessly in the background.",
 
   },
 
@@ -80,7 +80,7 @@ export default function Downloads() {
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center data-animate mb-12">
-          <AnimatedHeading as="h2" text="Explore Pluely" className="text-3xl sm:text-4xl font-bold mb-4 text-gray-800" />
+          <AnimatedHeading as="h2" text="Explore Elk AI" className="text-3xl sm:text-4xl font-bold mb-4 text-gray-800" />
           <p className="text-gray-600">
             Download for your platform, browse release history, or explore our development journey
           </p>
@@ -88,7 +88,7 @@ export default function Downloads() {
 
         <div className="flex items-center gap-4 mb-6">
           <DownloadIcon className="text-sky-600" />
-          <h3 className="text-xl font-semibold text-gray-800">Download Pluely</h3>
+          <h3 className="text-xl font-semibold text-gray-800">Download Elk AI</h3>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-12">

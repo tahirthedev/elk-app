@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { ChevronDown } from "lucide-react"
 import AnimatedHeading from './animated-heading'
 
-export default function WhyPluely() {
+export default function WhyElkAI() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
@@ -30,7 +30,7 @@ export default function WhyPluely() {
     {
       title: "Complete Invisibility",
       description:
-        "Pluely's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.",
+        "Elk AI's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.",
       video: "http://cdn.elkai.cloud/downloads/videos/complete-1.mp4",
     },
     {
@@ -42,13 +42,13 @@ export default function WhyPluely() {
     {
       title: "Always On Top",
       description:
-        "Position your AI assistant anywhere on screen with smooth drag-and-drop. Adjustable transparency, always-on-top mode, and instant keyboard access keep Pluely ready when you need it.",
+        "Position your AI assistant anywhere on screen with smooth drag-and-drop. Adjustable transparency, always-on-top mode, and instant keyboard access keep Elk AI ready when you need it.",
       video: "http://cdn.elkai.cloud/downloads/videos/complete-3.mp4",
     },
     {
       title: "AI-Powered Assistance",
       description:
-        "Get intelligent suggestions and real-time help powered by advanced AI. From code completion to meeting summaries, Pluely understands context and delivers relevant assistance instantly.",
+        "Get intelligent suggestions and real-time help powered by advanced AI. From code completion to meeting summaries, Elk AI understands context and delivers relevant assistance instantly.",
       video: "http://cdn.elkai.cloud/downloads/videos/complete-4.mp4",
     },
     {

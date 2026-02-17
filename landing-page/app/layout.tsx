@@ -8,15 +8,15 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Pluely - Your Invisible AI Assistant",
+  title: "Elk AI - Your Invisible AI Assistant",
   description:
     "The privacy-first AI assistant that operates with complete stealth during meetings, interviews, and presentations. Built with Tauri and Rust for blazing-fast performance.",
   generator: "v0.app",
   icons: {
     icon: [
       {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        url: "/logo.png",
+        type: "image/png",
       },
     ],
   },

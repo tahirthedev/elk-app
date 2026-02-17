@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Header from "@/components/header"
 import Hero from "@/components/hero"
 import Features from "@/components/features"
-import WhyPluely from "@/components/why-pluely"
+import WhyElkAI from "@/components/why-pluely"
 import Invisibility from "@/components/invisibility"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
 import ScreenshotCapture from "@/components/screenshot-capture"
@@ -57,7 +57,7 @@ export default function Home() {
         <CompleteInvisibilityTwo />
          <CompleteInvisibilityThree />
           <CompleteInvisibilityFour />
-      <WhyPluely />
+      <WhyElkAI />
       {/* <Invisibility /> */}
       {/* <FaqVideos /> */}
       <FaqTwo />

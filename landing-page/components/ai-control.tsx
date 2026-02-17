@@ -62,9 +62,9 @@ export default function AIControl() {
           className="mt-12 glass-effect rounded-xl p-8 border border-white/10 data-animate"
           style={{ animationDelay: "0.3s" }}
         >
-          <h3 className="text-xl font-semibold mb-4">Pluely API (Optional)</h3>
+          <h3 className="text-xl font-semibold mb-4">Elk AI API (Optional)</h3>
           <p className="text-gray-400">
-            Don't want to maintain your own API keys? Use our optional Pluely API for convenient access to 120+ premium
+            Don't want to maintain your own API keys? Use our optional Elk AI API for convenient access to 120+ premium
             AI models. Get faster responses with GPT-4, Claude, and Gemini without managing multiple API subscriptions.
           </p>
         </div>

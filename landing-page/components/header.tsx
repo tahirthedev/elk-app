@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 
 export default function Header() {
@@ -20,7 +21,7 @@ export default function Header() {
   const navItems = [
     { name: "Downloads", href: "#downloads" },
     { name: "Features", href: "#features" },
-    { name: "Why Pluely?", href: "#why" },
+    { name: "Why Elk AI?", href: "#why" },
     { name: "Pricing", href: "/pricing" },
     { name: "Affiliate", href: "#affiliate" },
   ]
@@ -39,10 +40,14 @@ export default function Header() {
      
           {/* Logo */}
           <Link href="/" className="flex items-center justify-center gap-2">
-            <div className="w-8 h-8 bg-yellow-400 rounded-lg flex justify-center items-center  font-bold text-black group-hover:scale-110 transition-transform">
-              P
-            </div>
-            <span className="font-bold text-lg hidden sm:inline text-gray-900">Pluely</span>
+            <Image 
+              src="/logo.png" 
+              alt="Elk AI Logo" 
+              width={32} 
+              height={32}
+              className="group-hover:scale-110 transition-transform"
+            />
+            <span className="font-bold text-lg hidden sm:inline text-gray-900">Elk AI</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -96,7 +101,7 @@ export default function Header() {
             ))}
             <div className="flex flex-col gap-2 mt-4">
               <Link
-                href="https://github.com/iamsrikanthnani/pluely"
+                href="#"
                 className="px-4 py-2 text-sm text-gray-300 border border-white/10 rounded-lg text-center"
               >
                 GitHub

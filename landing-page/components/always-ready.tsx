@@ -19,7 +19,7 @@ export default function AlwaysReady() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">Always Ready & Accessible</h2>
             <p className="text-gray-400 text-lg mb-6">
               Position your AI assistant anywhere on screen with smooth drag-and-drop. Adjustable transparency,
-              always-on-top mode, and instant keyboard access keep Pluely ready when you need it.
+              always-on-top mode, and instant keyboard access keep Elk AI ready when you need it.
             </p>
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-gray-300">

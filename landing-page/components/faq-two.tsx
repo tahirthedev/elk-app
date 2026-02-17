@@ -7,24 +7,24 @@ import AnimatedHeading from './animated-heading';
 
 const faqs = [
     {
-        question: "What is Pluely and how does it work?",
-        answer: "Pluely is an invisible AI assistant that operates with complete stealth during meetings, interviews, and presentations. It uses a translucent overlay that's undetectable in video calls, screen shares, and recordings."
+        question: "What is Elk AI and how does it work?",
+        answer: "Elk AI is an invisible AI assistant that operates with complete stealth during meetings, interviews, and presentations. It uses a translucent overlay that's undetectable in video calls, screen shares, and recordings."
     },
     {
-        question: "Is Pluely really invisible in screen recordings?",
-        answer: "Yes, Pluely's overlay window is designed to be completely invisible in video calls, screen shares, and recordings on platforms like Zoom, Google Meet, Microsoft Teams, and Slack Huddles."
+        question: "Is Elk AI really invisible in screen recordings?",
+        answer: "Yes, Elk AI's overlay window is designed to be completely invisible in video calls, screen shares, and recordings on platforms like Zoom, Google Meet, Microsoft Teams, and Slack Huddles."
     },
     {
-        question: "Which AI providers does Pluely support?",
-        answer: "Pluely supports all major AI providers including OpenAI, Anthropic, Google, xAI, Mistral, Cohere, Perplexity, Groq, Ollama, or your own custom endpoint. You can switch providers anytime without losing your chat history."
+        question: "Which AI providers does Elk AI support?",
+        answer: "Elk AI supports all major AI providers including OpenAI, Anthropic, Google, xAI, Mistral, Cohere, Perplexity, Groq, Ollama, or your own custom endpoint. You can switch providers anytime without losing your chat history."
     },
     {
-        question: "What platforms is Pluely available on?",
-        answer: "Pluely works seamlessly across Windows, macOS, and Linux, providing a consistent experience across all your devices and workflows."
+        question: "What platforms is Elk AI available on?",
+        answer: "Elk AI works seamlessly across Windows, macOS, and Linux, providing a consistent experience across all your devices and workflows."
     },
     {
-        question: "How do I control Pluely during meetings?",
-        answer: "Pluely offers fully customizable global keyboard shortcuts for instant access. You can toggle the window, dashboard, system audio, voice input, screenshot, and more with custom keybindings."
+        question: "How do I control Elk AI during meetings?",
+        answer: "Elk AI offers fully customizable global keyboard shortcuts for instant access. You can toggle the window, dashboard, system audio, voice input, screenshot, and more with custom keybindings."
     },
 ];
 

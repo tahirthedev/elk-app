@@ -9,7 +9,7 @@ const CompleteInvisibilityFour = () => {
             <div className='max-w-6xl mx-auto p-8 '>
                 <div className='flex items-center justify-between gap-12 mb-8 data-animate'>
                     <AnimatedHeading text="Always Ready & Accessible" className='font-bold text-4xl whitespace-nowrap' />
-                    <p className='text-gray-600 text-left max-w-xl'>Position your AI assistant anywhere on screen with smooth drag-and-drop. Adjustable transparency, always-on-top mode, and instant keyboard access keep Pluely ready when you need it.
+                    <p className='text-gray-600 text-left max-w-xl'>Position your AI assistant anywhere on screen with smooth drag-and-drop. Adjustable transparency, always-on-top mode, and instant keyboard access keep Elk AI ready when you need it.
                     </p>
                 </div>
 
