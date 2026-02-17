@@ -89,14 +89,14 @@ jobs:
     - name: Upload DMG (Apple Silicon)
       uses: actions/upload-artifact@v4
       with:
-        name: cheating-daddy-mac-arm64
+        name: elk-ai-mac-arm64
         path: cheating-daddy/out/make/**/*arm64*.dmg
         if-no-files-found: warn
         
     - name: Upload DMG (Intel)
       uses: actions/upload-artifact@v4
       with:
-        name: cheating-daddy-mac-x64
+        name: elk-ai-mac-x64
         path: cheating-daddy/out/make/**/*x64*.dmg
         if-no-files-found: warn
         

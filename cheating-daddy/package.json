@@ -1,8 +1,8 @@
 {
-    "name": "cheating-daddy",
-    "productName": "cheating-daddy",
+    "name": "elk-ai",
+    "productName": "Elk AI",
     "version": "0.4.0",
-    "description": "cheating daddy",
+    "description": "Elk AI - Your Invisible AI Assistant",
     "main": "src/index.js",
     "scripts": {
         "start": "electron-forge start",
@@ -13,11 +13,11 @@
         "test": "vitest run"
     },
     "keywords": [
-        "cheating daddy",
-        "cheating daddy ai",
-        "cheating daddy ai assistant",
-        "cheating daddy ai assistant for interviews",
-        "cheating daddy ai assistant for interviews"
+        "elk ai",
+        "elk ai assistant",
+        "ai assistant",
+        "invisible ai",
+        "meeting assistant"
     ],
     "author": {
         "name": "sohzm",

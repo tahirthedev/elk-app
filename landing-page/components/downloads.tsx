@@ -12,22 +12,22 @@ const platforms = [
     name: "macOS",
     desc: "Apple Silicon (ARM64)",
     icon: <Apple />,
-    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-arm64.dmg`,
-    filename: "CheatingDaddy-0.4.0-arm64.dmg"
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/ElkAI-0.4.0-arm64.dmg`,
+    filename: "ElkAI-0.4.0-arm64.dmg"
   },
   {
     name: "macOS",
     desc: "Intel (x64)",
     icon: <Apple />,
-    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-x64.dmg`,
-    filename: "CheatingDaddy-0.4.0-x64.dmg"
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/ElkAI-0.4.0-x64.dmg`,
+    filename: "ElkAI-0.4.0-x64.dmg"
   },
   {
     name: "Windows",
     desc: "x64 Architecture",
     icon: <Monitor />,
-    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/windows/CheatingDaddy-0.4.0 Setup.exe`,
-    filename: "CheatingDaddy-0.4.0 Setup.exe"
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/windows/ElkAI-0.4.0 Setup.exe`,
+    filename: "ElkAI-0.4.0 Setup.exe"
   },
 ]
 
@@ -36,22 +36,22 @@ const platformsTwo = [
     name: "macOS",
     desc: "Apple Silicon (ARM64)",
     icon: <Apple />,
-    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-arm64.dmg`,
-    filename: "CheatingDaddy-0.4.0-arm64.dmg"
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/ElkAI-0.4.0-arm64.dmg`,
+    filename: "ElkAI-0.4.0-arm64.dmg"
   },
   {
     name: "macOS",
     desc: "Intel (x64)",
     icon: <Apple />,
-    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/CheatingDaddy-0.4.0-x64.dmg`,
-    filename: "CheatingDaddy-0.4.0-x64.dmg"
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/mac/ElkAI-0.4.0-x64.dmg`,
+    filename: "ElkAI-0.4.0-x64.dmg"
   },
   {
     name: "Windows",
     desc: "x64 Architecture",
     icon: <Monitor />,
-    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/windows/CheatingDaddy-0.4.0 Setup.exe`,
-    filename: "CheatingDaddy-0.4.0 Setup.exe"
+    downloadUrl: `${DOWNLOAD_BASE_URL}/installers/windows/ElkAI-0.4.0 Setup.exe`,
+    filename: "ElkAI-0.4.0 Setup.exe"
   },
 ]
 

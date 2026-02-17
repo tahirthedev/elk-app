@@ -35,6 +35,6 @@ jobs:
       - name: Upload Windows x64 artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cheating-daddy-windows-x64
+          name: elk-ai-windows-x64
           path: cheating-daddy/out/make/squirrel.windows/x64/*.exe
           if-no-files-found: error
