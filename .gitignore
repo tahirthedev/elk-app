@@ -1,6 +1,4 @@
 # Sensitive files - DO NOT COMMIT
-.env
-.env.local
 .env.*.local
 *.key
 *.pem
@@ -54,3 +52,4 @@ upload-files.ps1
 
 # Landing page - not working on it today
 # landing-page/
+config.bat

@@ -26,8 +26,8 @@ const platforms = [
     name: "Windows",
     desc: "x64 Architecture",
     icon: <Monitor />,
-    downloadUrl: `${GITHUB_RELEASE_URL}/ElkAI-0.4.0%20Setup.exe`,
-    filename: "ElkAI-0.4.0 Setup.exe"
+    downloadUrl: `${GITHUB_RELEASE_URL}/ElkAI-0.4.0.Setup.exe`,
+    filename: "ElkAI-0.4.0.Setup.exe"
   },
 ]
 
@@ -50,8 +50,8 @@ const platformsTwo = [
     name: "Windows",
     desc: "x64 Architecture",
     icon: <Monitor />,
-    downloadUrl: `${GITHUB_RELEASE_URL}/ElkAI-0.4.0%20Setup.exe`,
-    filename: "ElkAI-0.4.0 Setup.exe"
+    downloadUrl: `${GITHUB_RELEASE_URL}/ElkAI-0.4.0.Setup.exe`,
+    filename: "ElkAI-0.4.0.Setup.exe"
   },
 ]
 
