@@ -12,13 +12,13 @@ export default function FaqVideos() {
             title: "Complete Invisibility",
             description:
                 "Elk AI's translucent overlay window sits above all applications, invisible in video calls, screen shares, and recordings. Perfect stealth for meetings on Zoom, Google Meet, Microsoft Teams, and Slack Huddles.",
-            video: "http://cdn.elkai.cloud/downloads/videos/complete-1.mp4",
+            video: "/video/complete-1.mp4",
         },
         {
             title: "Keyboard Shortcuts",
             description:
                 "Fully customizable global shortcuts for instant access. Toggle window, Dashboard, System Audio, Voice Input, Screenshot, and more with custom keybindings.",
-            video: "http://cdn.elkai.cloud/downloads/videos/complete-2.mp4",
+            video: "/video/complete-2.mp4",
         },
 
 

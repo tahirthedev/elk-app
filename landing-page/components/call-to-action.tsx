@@ -26,7 +26,7 @@ import { Button } from './ui/button'
 const CallToAction = () => {
   return (
     <>
-       <section className="bg-cover relative bg-center flex items-center justify-center py-10" style={{backgroundImage: "url('/call-to-action.jpg')"}}>
+       <section className="bg-cover relative bg-center flex items-center justify-center py-10" style={{backgroundImage: "url('/image 8.jpg')"}}>
          {/* Dark overlay */}
          <div className='absolute inset-0 bg-black/50'></div>
          

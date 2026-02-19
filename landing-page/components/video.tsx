@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 
 const VideoWithCards = () => {
     const slides = [
-        { icon: <Star />, label: 'Star', video: 'http://cdn.elkai.cloud/downloads/videos/slide-1.mp4' },
-        { icon: <Heart />, label: 'Heart', video: 'http://cdn.elkai.cloud/downloads/videos/slide-2.mp4' },
-        { icon: <User />, label: 'User', video: 'http://cdn.elkai.cloud/downloads/videos/slide-3.mp4' },
-        { icon: <Bolt />, label: 'Bolt', video: 'http://cdn.elkai.cloud/downloads/videos/slide-4.mp4' },
-        { icon: <Check />, label: 'Check', video: 'http://cdn.elkai.cloud/downloads/videos/slide-5.mp4' },
-        { icon: <Smile />, label: 'Smile', video: 'http://cdn.elkai.cloud/downloads/videos/slide-6.mp4' },
+        { icon: <Star />, label: 'Star', video: '/video/slide-1.mp4' },
+        { icon: <Heart />, label: 'Heart', video: '/video/slide-2.mp4' },
+        { icon: <User />, label: 'User', video: '/video/slide-3.mp4' },
+        { icon: <Bolt />, label: 'Bolt', video: '/video/slide-4.mp4' },
+        { icon: <Check />, label: 'Check', video: '/video/slide-5.mp4' },
+        { icon: <Smile />, label: 'Smile', video: '/video/slide-6.mp4' },
     ];
 
     const [activeSlide, setActiveSlide] = useState(0);
@@ -26,7 +26,7 @@ const VideoWithCards = () => {
                 playsInline
                 className='rounded-xl border border-gray-200/50 w-full h-full object-cover absolute inset-0 p-4'
             >
-                <source src="http://cdn.elkai.cloud/downloads/videos/feature-bg.mp4" type="video/mp4" />
+                <source src="/video/feature-bg.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
